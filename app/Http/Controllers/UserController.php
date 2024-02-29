@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index(Request $request)
-    {   
+    {
        $users = DB::table('users')
         ->when($request->input('name'), function ($query, $name) {
             return $query->where('name', 'like', '%' . $name . '%');
@@ -24,7 +24,7 @@ class UserController extends Controller
 
         return view(' pages.user.index', compact('users'));
 
-       
+
     }
 
     public function create()
@@ -34,15 +34,16 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
+        //dd($request->all());
         User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
             'roles' => $request['roles'],
             'phone' => $request['phone'],
-           
+
         ]);
-        
+
 
         // $data = $request->all();
         // $data['password'] = Hash::make($request->password);
@@ -51,7 +52,7 @@ class UserController extends Controller
     }
     public function edit($id)
     {
-        $user = \App\Models\User::findOrFail($id);
+        $user = User::findOrFail($id);
         return view('pages.user.edit', compact('user'));
     }
 
@@ -66,7 +67,6 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-
         $validate = $request->validated();
         $user->update($validate);
         return redirect()->route('user.index')->with('success', 'Data anda berhasil di edit');
@@ -79,6 +79,6 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('success', 'Data anda berhasil di hapus');
     }
 
-    
-    
+
+
 }

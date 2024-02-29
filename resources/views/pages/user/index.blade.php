@@ -34,7 +34,7 @@
                         <div class="card mb-0">
                             <div class="card-body">
                                 <ul class="nav nav-pills">
-                                   
+
                                 </ul>
                             </div>
                         </div>
@@ -49,7 +49,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="float-left">
-                                   
+
                                 </div>
                                 <div class="float-right">
                                     <form method="GET" action="{{ route('user.index') }}">
@@ -69,17 +69,21 @@
                                 <div class="table-responsive">
                                     <table class="table-striped table">
                                         <tr>
-                                            
+
                                             <th>Name</th>
+                                            <th>Peran</th>
                                             <th>Email</th>
                                             <th>Phone</th>
                                             <th>Created At</th>
                                             <th>Action</th>
                                         </tr>
                                         @foreach ($users as $user)
-                                         <tr>                                            
+                                         <tr>
                                             <td>
                                             {{ $user->name }}
+                                            </td>
+                                            <td>
+                                            {{ $user->roles }}
                                             </td>
                                             <td>
                                             {{ $user->email }}
@@ -97,7 +101,7 @@
                                                             <i class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
-                                                        
+
                                                         <form action="{{ route('user.destroy', $user->id) }}" method="POST"
                                                             class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE" />
@@ -112,7 +116,7 @@
                                         </tr>
                                         @endforeach
                                         </tbody>
-                                        
+
                                     </table>
                                 </div>
                                 <div class="float-right">
